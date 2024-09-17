@@ -22,13 +22,11 @@ useSeoMeta({
     title: "Datashaman Forms",
     description: "Generate forms with AI.",
     ogImage: "/social-image.png",
-    twitterImage: "/social-image.png",
-    twitterCard: "summary_large_image",
 });
 </script>
 
 <template>
-    <UContainer class="min-h-screen flex flex-col justify-center">
+    <UContainer class="w-1/3 min-h-screen flex flex-col justify-center">
         <div class="mb-2 text-right">
             <UButton
                 square
@@ -52,14 +50,6 @@ useSeoMeta({
                 class="text-sm text-gray-500 hover:text-gray-700"
             >
                 GitHub
-            </NuxtLink>
-            ·
-            <NuxtLink
-                href="https://twitter.com/atinux"
-                target="_blank"
-                class="text-sm text-gray-500 hover:text-gray-700"
-            >
-                Twitter
             </NuxtLink>
         </footer>
     </UContainer>
