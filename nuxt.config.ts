@@ -7,6 +7,7 @@ export default defineNuxtConfig({
     "@nuxthub/core",
     "nuxt-auth-utils",
     "@nuxt/eslint",
+    "@nuxt/ui",
     "@nuxtjs/tailwindcss",
   ],
   hub: {
