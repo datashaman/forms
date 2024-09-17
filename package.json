@@ -19,6 +19,7 @@
   },
   "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610",
   "devDependencies": {
+    "@nuxthub/core": "^0.7.18",
     "@nuxtjs/tailwindcss": "^6.12.1",
     "daisyui": "^4.12.10",
     "dompurify": "^3.1.6",
