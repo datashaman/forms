@@ -1,6 +1,6 @@
 import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core";
 
-export const todos = sqliteTable("forms", {
+export const forms = sqliteTable("forms", {
   id: integer("id").primaryKey(),
   userId: integer("user_id").notNull(), // GitHub Id
   title: text("title").notNull(),
