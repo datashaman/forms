@@ -1,21 +1,22 @@
-const functions = {
-  getCurrentTime: () => {
-    return {
-      time: new Date().toLocaleTimeString(),
-    };
-  },
-};
-
-const schemas = {
-  getCurrentTime: {
-    type: "function",
-    function: {
-      name: "getCurrentTime",
-    },
-  },
-};
-
 export const useTools = () => {
+  const functions = {
+    getCurrentTime: () => {
+      return {
+        time: new Date().toLocaleTimeString(),
+      };
+    },
+    setFormHTML: (args) => {},
+  };
+
+  const schemas = {
+    getCurrentTime: {
+      type: "function",
+      function: {
+        name: "getCurrentTime",
+      },
+    },
+  };
+
   const defineTools = (tools) => {
     return tools.map((name) => {
       return schemas[name];

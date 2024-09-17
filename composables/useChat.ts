@@ -131,17 +131,20 @@ export function useChat() {
     isLoading.value = true;
     error.value = null;
 
+    /*
     const after =
       messages.value.length > 0
         ? messages.value[messages.value.length - 1].id
         : null;
 
     url += `?after=${after}`;
+    */
 
     try {
       const { messages: data } = await $fetch(url);
 
-      messages.value = [...messages.value, ...data];
+      // messages.value = [...messages.value, ...data];
+      messages.value = data;
     } catch (err: any) {
       error.value = err.message || "Unknown error occurred";
 
