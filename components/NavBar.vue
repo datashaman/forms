@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar bg-base-200 shadow z-10">
+    <nav class="navbar shadow z-10">
         <div class="flex-1">
             <a class="btn btn-ghost normal-case text-xl">Chat App</a>
         </div>

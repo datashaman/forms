@@ -44,39 +44,16 @@ onMounted(async () => {
         scrollToBottom();
     });
 
-    chatWidth.value = localStorage.getItem("chatWidth") || "33.33%";
     await fetchMessages();
     scrollToBottom();
 });
-
-const handleResize = (event) => {
-    const startX = event.clientX;
-    const startWidth = parseFloat(
-        getComputedStyle(event.target.parentNode).width,
-    );
-
-    const onMouseMove = (e) => {
-        const newWidth = startWidth + (e.clientX - startX);
-        const percentageWidth = (newWidth / window.innerWidth) * 100;
-        chatWidth.value = `${percentageWidth}%`;
-    };
-
-    const onMouseUp = () => {
-        document.removeEventListener("mousemove", onMouseMove);
-        document.removeEventListener("mouseup", onMouseUp);
-    };
-
-    document.addEventListener("mousemove", onMouseMove);
-    document.addEventListener("mouseup", onMouseUp);
-};
 </script>
 <template>
-    <div
-        id="chat-container"
-        class="flex flex-col border-r border-base-200 overflow-hidden resize-x"
-        style="min-width: 200px; width: 30%"
-    >
-        <div id="chat-messages" class="flex-grow overflow-y-auto space-y-4 p-4">
+    <div class="flex flex-col overflow-hidden">
+        <div
+            ref="messagesContainer"
+            class="flex-grow flex flex-col overflow-y-auto p-4"
+        >
             <div v-for="message in messages" :key="message.id">
                 <div
                     v-if="message.role === 'assistant'"
@@ -111,7 +88,7 @@ const handleResize = (event) => {
             </div>
         </div>
 
-        <div class="bg-base-200 border-t border-base-300">
+        <div class="bg-base-300 border-base-300">
             <div class="flex items-center p-4">
                 <input
                     v-model="userMessage"

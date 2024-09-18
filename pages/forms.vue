@@ -76,7 +76,7 @@ const handleResize = (event) => {
 </script>
 
 <template>
-    <ChatPanel />
-    <CodePanel> code </CodePanel>
-    <SettingsPanel />
+    <ChatPanel class="border-r bg-base-200 border-base-200 min-w-52 w-1/5" />
+    <CodePanel class="h-full flex-grow border-r border-base-200 w-2/5" />
+    <PreviewPanel class="bg-base-300 min-w-52 w-2/5" />
 </template>

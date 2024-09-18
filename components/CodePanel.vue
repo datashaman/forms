@@ -1,9 +1,13 @@
+<script setup>
+const code = ref("cost a = 1");
+</script>
 <template>
-    <div
-        class="flex flex-col flex-grow overflow-y-auto border-r border-base-200"
-    >
-        <code class="typescript">
-            <slot></slot>
-        </code>
+    <div class="overflow-y-auto hljs">
+        <ClientOnly fallbackTag="pre">
+            <highlightjs autodetect :code="code" />
+            <template #fallback>
+                <pre><code>{{ code }}</code></pre>
+            </template>
+        </ClientOnly>
     </div>
 </template>

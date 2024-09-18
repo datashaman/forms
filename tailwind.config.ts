@@ -1,9 +1,7 @@
-import type { Config } from 'tailwindcss'
-import colors from 'tailwindcss/colors'
+import type { Config } from "tailwindcss";
+import colors from "tailwindcss/colors";
+import typography from "@tailwindcss/typography";
 
 export default <Partial<Config>>{
-    plugins: [
-        require('daisyui'),
-    ],
-}
-
+  plugins: [typography, require("daisyui")],
+};
