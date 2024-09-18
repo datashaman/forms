@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+            rel="stylesheet"
+        />
+        <link
+            href="https://cdn.jsdelivr.net/npm/daisyui@2.51.5/dist/full.css"
+            rel="stylesheet"
+        />
+        <title>Chat UI with DaisyUI and Fixed Scrolling</title>
+    </head>
+    <body class="flex flex-col h-screen bg-base-100">
+        <!-- Navbar -->
+        <nav class="navbar bg-base-200 shadow">
+            <div class="flex-1">
+                <a class="btn btn-ghost normal-case text-xl">Chat App</a>
+            </div>
+            <div class="flex-none">
+                <button class="btn btn-sm btn-ghost">Home</button>
+                <button class="btn btn-sm btn-ghost">Profile</button>
+                <button class="btn btn-sm btn-ghost">Settings</button>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="flex flex-grow h-0">
+            <!-- Chat Container -->
+            <div
+                class="flex flex-col w-1/2 border-r border-base-200 overflow-y-auto p-4 space-y-4"
+            >
+                <!-- Chat Messages -->
+                <div class="chat chat-start">
+                    <div class="chat-bubble">
+                        Hello! How can I help you today?
+                    </div>
+                </div>
+
+                <div class="chat chat-end">
+                    <div class="chat-bubble chat-bubble-primary">
+                        I need some information about your services.
+                    </div>
+                </div>
+
+                <!-- More messages added to test scrolling -->
+                <div class="chat chat-start">
+                    <div class="chat-bubble">
+                        Sure, we offer a variety of services tailored to your
+                        needs.
+                    </div>
+                </div>
+
+                <div class="chat chat-end">
+                    <div class="chat-bubble chat-bubble-primary">
+                        Can you tell me more about your pricing?
+                    </div>
+                </div>
+
+                <div class="chat chat-start">
+                    <div class="chat-bubble">
+                        Our pricing is competitive and depends on the services
+                        you require.
+                    </div>
+                </div>
+
+                <div class="chat chat-end">
+                    <div class="chat-bubble chat-bubble-primary">
+                        Do you provide support after the service is completed?
+                    </div>
+                </div>
+
+                <div class="chat chat-start">
+                    <div class="chat-bubble">
+                        Yes, we offer 24/7 support for all our services.
+                    </div>
+                </div>
+
+                <div class="chat chat-end">
+                    <div class="chat-bubble chat-bubble-primary">
+                        That's great! What is the next step?
+                    </div>
+                </div>
+
+                <div class="chat chat-start">
+                    <div class="chat-bubble">
+                        The next step is to schedule a consultation with one of
+                        our experts.
+                    </div>
+                </div>
+
+                <div class="chat chat-end">
+                    <div class="chat-bubble chat-bubble-primary">
+                        I'd like to schedule a consultation. Can I do that
+                        online?
+                    </div>
+                </div>
+
+                <div class="chat chat-start">
+                    <div class="chat-bubble">
+                        Absolutely! Just visit our website and fill out the
+                        consultation form.
+                    </div>
+                </div>
+
+                <div class="chat chat-end">
+                    <div class="chat-bubble chat-bubble-primary">
+                        Perfect, thank you!
+                    </div>
+                </div>
+
+                <div class="chat chat-start">
+                    <div class="chat-bubble">
+                        You're welcome! Have a great day!
+                    </div>
+                </div>
+
+                <!-- End of additional messages -->
+            </div>
+
+            <!-- Right Panel -->
+            <div class="flex flex-col w-1/2 p-4 bg-base-100 overflow-y-auto">
+                <h2 class="text-xl font-semibold mb-4">
+                    Additional Information
+                </h2>
+                <p>
+                    This is where additional content or information can be
+                    displayed, such as user details, chat settings, or other
+                    relevant data.
+                </p>
+                <!-- Add more content to the right panel here -->
+            </div>
+        </div>
+
+        <!-- Chat Input -->
+        <div class="bg-base-200 p-4 border-t border-base-300">
+            <div class="flex items-center">
+                <input
+                    type="text"
+                    class="input input-bordered w-full mr-2"
+                    placeholder="Type your message..."
+                />
+                <button class="btn btn-primary">Send</button>
+            </div>
+        </div>
+    </body>
+</html>

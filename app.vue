@@ -1,5 +1,5 @@
 <script setup>
-const { loggedIn } = useUserSession();
+const { loggedIn, clear } = useUserSession();
 const colorMode = useColorMode();
 
 watch(loggedIn, () => {
@@ -17,47 +17,60 @@ useHead({
     link: [{ rel: "icon", href: "/icon.png" }],
 });
 
+const containerClasses = computed(() => {
+    const classes = {
+        flex: true,
+        "flex-col": true,
+        "h-screen": true,
+    };
+
+    if (true || loggedIn.value) {
+        return {
+            ...classes,
+            container: true,
+            "mx-auto": true,
+        };
+    }
+
+    return {
+        ...classes,
+        "w-1/3": true,
+        "mx-auto": true,
+    };
+});
+
 useSeoMeta({
     viewport: "width=device-width, initial-scale=1, maximum-scale=1",
     title: "Datashaman Forms",
     description: "Generate forms with AI.",
-    ogImage: "/social-image.png",
 });
+
+const logout = async () => {
+    await clear();
+    return navigateTo("/");
+};
 </script>
 
 <template>
-    <UContainer class="w-1/3 min-h-screen flex flex-col justify-center">
-        <div class="mb-2 text-right">
-            <UButton
-                square
-                variant="ghost"
-                color="black"
-                :icon="
-                    $colorMode.preference === 'dark'
-                        ? 'i-heroicons-moon'
-                        : 'i-heroicons-sun'
-                "
-                @click="toggleColorMode"
-            />
+    <div :class="containerClasses">
+        <div v-if="true || loggedIn" class="navbar bg-base-100">
+            <div class="flex-1">
+                <nuxt-link to="/" class="btn btn-ghost text-xl"
+                    >Forms</nuxt-link
+                >
+            </div>
+            <div class="flex-none">
+                <ul class="menu menu-horizontal px-1">
+                    <li>
+                        <button class="btn btn-ghost" @click="logout">
+                            Logout
+                        </button>
+                    </li>
+                </ul>
+            </div>
         </div>
-
-        <NuxtPage />
-
-        <footer class="text-center mt-2">
-            <NuxtLink
-                href="https://github.com/datashaman/forms"
-                target="_blank"
-                class="text-sm text-gray-500 hover:text-gray-700"
-            >
-                GitHub
-            </NuxtLink>
-        </footer>
-    </UContainer>
-    <UNotifications />
+        <div class="flex-grow flex">
+            <NuxtPage />
+        </div>
+    </div>
 </template>
-
-<style lang="postcss">
-body {
-    @apply font-sans text-gray-950 bg-gray-50 dark:bg-gray-950 dark:text-gray-50;
-}
-</style>

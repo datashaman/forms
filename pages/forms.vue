@@ -6,16 +6,10 @@ import markedLinkifyIt from "marked-linkify-it";
 import DOMPurify from "dompurify";
 
 definePageMeta({
-    middleware: "auth",
+    // middleware: "auth",
 });
 
 const { loggedIn } = useUserSession();
-
-watch(loggedIn, (value) => {
-    if (!value) {
-        navigateTo({ name: "login" });
-    }
-});
 
 const {
     messagesContainer,
@@ -82,13 +76,16 @@ const handleResize = (event) => {
 </script>
 
 <template>
-    <div class="container mx-auto flex flex-row h-screen">
+    <div class="flex flex-row h-full">
         <div
             class="h-full flex flex-col p-4 border-r overflow-hidden resize-x"
             :style="{ width: chatWidth }"
         >
             <h2 class="font-semibold text-lg">Messages</h2>
-            <div class="flex-grow overflow-y-auto mb-4" ref="messagesContainer">
+            <div
+                class="flex-grow overflow-y-auto mt-2 mb-4"
+                ref="messagesContainer"
+            >
                 <div class="flex flex-col">
                     <div v-for="message in messages" :key="message.id">
                         <div
