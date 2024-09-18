@@ -17,28 +17,6 @@ useHead({
     link: [{ rel: "icon", href: "/icon.png" }],
 });
 
-const containerClasses = computed(() => {
-    const classes = {
-        flex: true,
-        "flex-col": true,
-        "h-screen": true,
-    };
-
-    if (true || loggedIn.value) {
-        return {
-            ...classes,
-            container: true,
-            "mx-auto": true,
-        };
-    }
-
-    return {
-        ...classes,
-        "w-1/3": true,
-        "mx-auto": true,
-    };
-});
-
 useSeoMeta({
     viewport: "width=device-width, initial-scale=1, maximum-scale=1",
     title: "Datashaman Forms",
@@ -52,25 +30,9 @@ const logout = async () => {
 </script>
 
 <template>
-    <div :class="containerClasses">
-        <div v-if="true || loggedIn" class="navbar bg-base-100">
-            <div class="flex-1">
-                <nuxt-link to="/" class="btn btn-ghost text-xl"
-                    >Forms</nuxt-link
-                >
-            </div>
-            <div class="flex-none">
-                <ul class="menu menu-horizontal px-1">
-                    <li>
-                        <button class="btn btn-ghost" @click="logout">
-                            Logout
-                        </button>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="flex-grow flex">
+    <div>
+        <NuxtLayout>
             <NuxtPage />
-        </div>
+        </NuxtLayout>
     </div>
 </template>

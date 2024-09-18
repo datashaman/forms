@@ -11,139 +11,90 @@
             href="https://cdn.jsdelivr.net/npm/daisyui@2.51.5/dist/full.css"
             rel="stylesheet"
         />
-        <title>Chat UI with DaisyUI and Fixed Scrolling</title>
+        <title>Resizable Chat UI with DaisyUI</title>
     </head>
     <body class="flex flex-col h-screen bg-base-100">
-        <!-- Navbar -->
-        <nav class="navbar bg-base-200 shadow">
-            <div class="flex-1">
-                <a class="btn btn-ghost normal-case text-xl">Chat App</a>
-            </div>
-            <div class="flex-none">
-                <button class="btn btn-sm btn-ghost">Home</button>
-                <button class="btn btn-sm btn-ghost">Profile</button>
-                <button class="btn btn-sm btn-ghost">Settings</button>
-            </div>
-        </nav>
+        <NavBar />
 
         <!-- Main Content -->
-        <div class="flex flex-grow h-0">
-            <!-- Chat Container -->
-            <div
-                class="flex flex-col w-1/2 border-r border-base-200 overflow-y-auto p-4 space-y-4"
-            >
-                <!-- Chat Messages -->
-                <div class="chat chat-start">
-                    <div class="chat-bubble">
-                        Hello! How can I help you today?
-                    </div>
-                </div>
+        <div class="flex flex-grow h-0"></div>
 
-                <div class="chat chat-end">
-                    <div class="chat-bubble chat-bubble-primary">
-                        I need some information about your services.
-                    </div>
-                </div>
+        <script>
+            // Get the chat container and settings panel elements
+            const chatContainer = document.getElementById("chat-container");
+            const settingsPanel = document.getElementById("settings-panel");
+            const resizeHandle = document.querySelector(".resize-handle");
+            const chatMessages = document.getElementById("chat-messages");
 
-                <!-- More messages added to test scrolling -->
-                <div class="chat chat-start">
-                    <div class="chat-bubble">
-                        Sure, we offer a variety of services tailored to your
-                        needs.
-                    </div>
-                </div>
+            // Load the saved widths from localStorage, if available
+            const savedChatWidth = localStorage.getItem("chatContainerWidth");
+            const savedSettingsWidth =
+                localStorage.getItem("settingsPanelWidth");
+            if (savedChatWidth) {
+                chatContainer.style.width = savedChatWidth;
+            }
+            if (savedSettingsWidth) {
+                settingsPanel.style.width = savedSettingsWidth;
+            }
 
-                <div class="chat chat-end">
-                    <div class="chat-bubble chat-bubble-primary">
-                        Can you tell me more about your pricing?
-                    </div>
-                </div>
+            // Function to save the widths to localStorage
+            const saveWidths = () => {
+                const chatWidth = window.getComputedStyle(chatContainer).width;
+                const settingsWidth =
+                    window.getComputedStyle(settingsPanel).width;
+                localStorage.setItem("chatContainerWidth", chatWidth);
+                localStorage.setItem("settingsPanelWidth", settingsWidth);
+            };
 
-                <div class="chat chat-start">
-                    <div class="chat-bubble">
-                        Our pricing is competitive and depends on the services
-                        you require.
-                    </div>
-                </div>
+            // Scroll to the bottom of the chat container
+            const scrollToBottom = () => {
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            };
 
-                <div class="chat chat-end">
-                    <div class="chat-bubble chat-bubble-primary">
-                        Do you provide support after the service is completed?
-                    </div>
-                </div>
+            // Function to handle dragging to resize the right panel
+            let isResizing = false;
+            resizeHandle.addEventListener("mousedown", (e) => {
+                isResizing = true;
+                document.body.style.cursor = "ew-resize";
+            });
 
-                <div class="chat chat-start">
-                    <div class="chat-bubble">
-                        Yes, we offer 24/7 support for all our services.
-                    </div>
-                </div>
+            document.addEventListener("mousemove", (e) => {
+                if (!isResizing) return;
+                const newWidth = window.innerWidth - e.clientX; // Calculate new width based on mouse position
+                settingsPanel.style.width = `${newWidth}px`;
+            });
 
-                <div class="chat chat-end">
-                    <div class="chat-bubble chat-bubble-primary">
-                        That's great! What is the next step?
-                    </div>
-                </div>
+            document.addEventListener("mouseup", () => {
+                if (isResizing) {
+                    isResizing = false;
+                    document.body.style.cursor = "";
+                    saveWidths(); // Save the new width
+                }
+            });
 
-                <div class="chat chat-start">
-                    <div class="chat-bubble">
-                        The next step is to schedule a consultation with one of
-                        our experts.
-                    </div>
-                </div>
+            // Function to handle resizing of the left panel
+            chatContainer.addEventListener("mouseup", saveWidths);
 
-                <div class="chat chat-end">
-                    <div class="chat-bubble chat-bubble-primary">
-                        I'd like to schedule a consultation. Can I do that
-                        online?
-                    </div>
-                </div>
+            // Save the widths of the panels when the window is resized
+            window.addEventListener("resize", saveWidths);
 
-                <div class="chat chat-start">
-                    <div class="chat-bubble">
-                        Absolutely! Just visit our website and fill out the
-                        consultation form.
-                    </div>
-                </div>
+            // Scroll to bottom on page load
+            window.onload = scrollToBottom;
 
-                <div class="chat chat-end">
-                    <div class="chat-bubble chat-bubble-primary">
-                        Perfect, thank you!
-                    </div>
-                </div>
+            // Function to update the card preview
+            function updateCardPreview() {
+                const title = document.getElementById("cardTitle").value;
+                const description =
+                    document.getElementById("cardDescription").value;
+                const imageUrl = document.getElementById("cardImageUrl").value;
 
-                <div class="chat chat-start">
-                    <div class="chat-bubble">
-                        You're welcome! Have a great day!
-                    </div>
-                </div>
-
-                <!-- End of additional messages -->
-            </div>
-
-            <!-- Right Panel -->
-            <div class="flex flex-col w-1/2 p-4 bg-base-100 overflow-y-auto">
-                <h2 class="text-xl font-semibold mb-4">
-                    Additional Information
-                </h2>
-                <p>
-                    This is where additional content or information can be
-                    displayed, such as user details, chat settings, or other
-                    relevant data.
-                </p>
-                <!-- Add more content to the right panel here -->
-            </div>
-        </div>
-
-        <!-- Chat Input -->
-        <div class="bg-base-200 p-4 border-t border-base-300">
-            <div class="flex items-center">
-                <input
-                    type="text"
-                    class="input input-bordered w-full mr-2"
-                    placeholder="Type your message..."
-                />
-                <button class="btn btn-primary">Send</button>
-            </div>
-        </div>
+                document.getElementById("previewTitle").textContent =
+                    title || "Sample Title";
+                document.getElementById("previewDescription").textContent =
+                    description || "Sample description goes here...";
+                document.getElementById("previewImage").src =
+                    imageUrl || "https://via.placeholder.com/300";
+            }
+        </script>
     </body>
 </html>
